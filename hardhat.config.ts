@@ -26,6 +26,10 @@ import "./src/tasks/flow";
 import "./src/tasks/mine";
 import "./src/tasks/upgrade";
 
+const { ProxyAgent, setGlobalDispatcher } = require("undici");
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7890");
+setGlobalDispatcher(proxyAgent);
+
 const config: HardhatUserConfig = {
     paths: {
         artifacts: "artifacts",
@@ -73,17 +77,95 @@ const config: HardhatUserConfig = {
         zgTestnetStandard: {
             ...userConfig,
             url: "https://evmrpc-testnet.0g.ai",
+            verify: {// used for hardhat-deploy plugin
+                etherscan: {
+                    apiUrl: 'https://chainscan-test.0g.ai/open'
+                },
+            },
         },
         zgTestnetTurbo: {
             ...userConfig,
             url: "https://evmrpc-testnet.0g.ai",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://chainscan-test.0g.ai/open'
+                },
+            },
         },
+        cfxTestnetEvm: {
+            ...userConfig,
+            url: "http://evmtestnet.confluxrpc.com",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://evmapi-testnet.confluxscan.io'
+                },
+            },
+        },
+        sepolia: {
+            ...userConfig,
+            url: "https://sepolia.drpc.org",
+        },
+        holesky: {
+            ...userConfig,
+            url: "https://holesky.drpc.org",
+        }
+    },
+    etherscan: { // used for hardhat-verify plugin
+        apiKey: {
+            zgTestnetStandard: "YOUR_ZG_SCAN_API_KEY",
+            zgTestnetTurbo: "YOUR_ZG_SCAN_API_KEY",
+            cfxTestnetEvm: "YOUR_CFX_SCAN_API_KEY",
+            sepolia: "YOUR_ether_SCAN_API_KEY",
+            holesky: "YOUR_ether_SCAN_API_KEY",
+        },
+        customChains: [
+            {
+                network: "zgTestnetStandard",
+                chainId: 16600,
+                urls: {
+                    apiURL: "https://chainscan-test.0g.ai/open/api",
+                    browserURL: "https://chainscan-newton.0g.ai"
+                }
+            },
+            {
+                network: "zgTestnetTurbo",
+                chainId: 16600,
+                urls: {
+                    apiURL: "https://chainscan-test.0g.ai/open/api",
+                    browserURL: "https://chainscan-newton.0g.ai"
+                }
+            },
+            {
+                network: "cfxTestnetEvm",
+                chainId: 71,
+                urls: {
+                    apiURL: "https://evmapi-testnet.confluxscan.io/api",
+                    browserURL: "https://evmtestnet.confluxscan.io"
+                },
+            },
+            {
+                network: "sepolia",
+                chainId: 11155111,
+                urls: {
+                    apiURL: "https://api-sepolia.etherscan.io/api",
+                    browserURL: "https://sepolia.etherscan.io/"
+                }
+            },
+            {
+                network: "holesky",
+                chainId: 17000,
+                urls: {
+                    apiURL: "https://api-holesky.etherscan.io/api",
+                    browserURL: "https://holesky.etherscan.io/"
+                }
+            }
+        ]
     },
     namedAccounts: {
         deployer: 0,
     },
     mocha: {
-        timeout: 2000000,
+        timeout: 100000000,
     },
     verify: {
         etherscan: {
