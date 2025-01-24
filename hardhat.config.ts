@@ -20,7 +20,11 @@ const userConfig: HttpNetworkUserConfig = {
     accounts: [DEPLOYER_KEY ? DEPLOYER_KEY : DEFAULT_DEPLOYER],
 };
 
+import "./src/tasks/access";
 import "./src/tasks/codesize";
+import "./src/tasks/flow";
+import "./src/tasks/mine";
+import "./src/tasks/upgrade";
 
 const config: HardhatUserConfig = {
     paths: {
@@ -66,9 +70,18 @@ const config: HardhatUserConfig = {
             ...userConfig,
             url: "http://0.0.0.0:8545",
         },
-        zgTestnet: {
+        zgTestnetStandard: {
             ...userConfig,
-            url: "http://0.0.0.0:8545",
+            url: "https://evmrpc-testnet.0g.ai",
+        },
+        zgTestnetTurbo: {
+            ...userConfig,
+            url: "https://evmrpc-testnet.0g.ai",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://chainscan-test.0g.ai/open'
+                },
+            },
         },
     },
     namedAccounts: {
