@@ -76,6 +76,11 @@ const config: HardhatUserConfig = {
         zgTestnetTurbo: {
             ...userConfig,
             url: "https://evmrpc-testnet.0g.ai",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://chainscan-test.0g.ai/open'
+                },
+            },
         },
     },
     namedAccounts: {
