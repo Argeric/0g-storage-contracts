@@ -66,7 +66,7 @@ contract UploadToken is ERC20, IUploadToken, OnlySender {
         _burn(account, storedBalance - realBalance);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint) internal override {
+    function _beforeTokenTransfer(address from, address to, uint) internal {
         if (to == address(0)) {
             return;
         }

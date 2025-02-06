@@ -7,7 +7,7 @@ import "../utils/MarketSpec.sol";
 import "../utils/ZgInitializable.sol";
 
 import "@openzeppelin/contracts/utils/Context.sol";
-import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
+import "@openzeppelin/contracts/access/extensions/AccessControlEnumerable.sol";
 
 contract FixedPrice is IMarket, ZgInitializable, AccessControlEnumerable {
     // reserved storage slots for base contract upgrade in future

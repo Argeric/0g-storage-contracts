@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Unlicense
 pragma solidity >=0.8.0 <0.9.0;
 
-import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/utils/math/Math.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./FlowTreeLib.sol";
 import "../utils/ZgInitializable.sol";
@@ -73,8 +73,8 @@ contract Flow is IFlow, PauseControl, ZgInitializable {
             digest: EMPTY_HASH
         });
         // initialize admin and pause control
-        _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-        _setupRole(PAUSER_ROLE, msg.sender);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(PAUSER_ROLE, msg.sender);
     }
 
     function initialize(address market_, uint blocksPerEpoch_) public virtual onlyInitializeOnce {

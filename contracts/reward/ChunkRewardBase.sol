@@ -9,7 +9,7 @@ import "../interfaces/IReward.sol";
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
-import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
+import "@openzeppelin/contracts/access/extensions/AccessControlEnumerable.sol";
 
 import "./Reward.sol";
 import "../utils/PullPayment.sol";

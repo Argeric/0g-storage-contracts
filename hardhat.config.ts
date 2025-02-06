@@ -40,7 +40,7 @@ const config: HardhatUserConfig = {
     solidity: {
         compilers: [
             {
-                version: "0.8.16",
+                version: "0.8.27",
                 settings: {
                     outputSelection: {
                         "*": {
@@ -56,10 +56,10 @@ const config: HardhatUserConfig = {
                         },
                     },
                     evmVersion: "istanbul",
-                    // viaIR: true,
+                    viaIR: true,
                     optimizer: {
                         enabled: true,
-                        runs: 200,
+                        runs: 1000,
                     },
                 },
             },
