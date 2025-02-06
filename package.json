@@ -9,6 +9,7 @@
     "coverage": "hardhat coverage",
     "deploy-market-enabled": "hardhat deploy --tags market-enabled --network",
     "deploy-no-market": "hardhat deploy --tags no-market --network",
+    "deploy-union": "hardhat deploy --tags union --network",
     "lint": "yarn lint:sol && yarn lint:ts",
     "lint:sol": "solhint 'contracts/**/*.sol'",
     "lint:ts": "eslint 'src/**/*.ts' '*.ts' --max-warnings 0 --fix",

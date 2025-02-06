@@ -26,9 +26,9 @@ import "./src/tasks/flow";
 import "./src/tasks/mine";
 import "./src/tasks/upgrade";
 
-const { ProxyAgent, setGlobalDispatcher } = require("undici");
-const proxyAgent = new ProxyAgent("http://127.0.0.1:7890");
-setGlobalDispatcher(proxyAgent);
+// const { ProxyAgent, setGlobalDispatcher } = require("undici");
+// const proxyAgent = new ProxyAgent("http://127.0.0.1:7890");
+// setGlobalDispatcher(proxyAgent);
 
 const config: HardhatUserConfig = {
     paths: {
@@ -108,6 +108,11 @@ const config: HardhatUserConfig = {
         holesky: {
             ...userConfig,
             url: "https://holesky.drpc.org",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://api-holesky.etherscan.io'
+                },
+            },
         }
     },
     etherscan: { // used for hardhat-verify plugin

@@ -9,6 +9,7 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 // if these files are not yet generated, as long as the "--typecheck" command-line argument is not used.
 import { BaseContract, ContractFactory, ContractRunner, ethers, Signer } from "ethers";
 import * as TypechainTypes from "../../typechain-types";
+import {Libraries} from "hardhat-deploy/types";
 // 2. We import the values at runtime and silently ignore any exceptions.
 export let Factories = {} as typeof TypechainTypes;
 try {
@@ -57,6 +58,8 @@ export const CONTRACTS = {
     ChunkDecayReward: new ContractMeta(Factories.ChunkDecayReward__factory),
     ChunkLinearReward: new ContractMeta(Factories.ChunkLinearReward__factory),
     CashierTest: new ContractMeta(Factories.CashierTest__factory),
+    StateLensIcs23SmtClient: new ContractMeta(Factories.StateLensIcs23SmtClient__factory),
+    StateLensIcs23SmtLib: new ContractMeta(Factories.StateLensIcs23SmtLib__factory)
 } as const;
 
 type GetContractTypeFromContractMeta<F> = F extends ContractMeta<infer C> ? C : never;
@@ -81,6 +84,24 @@ export async function deployDirectly(
         contract: contract.contractName(),
         args: args,
         log: true,
+    });
+}
+
+export async function deployDirectlyWithLibrary(
+    hre: HardhatRuntimeEnvironment,
+    contract: ContractMeta<unknown>,
+    libraries: Libraries,
+    args: unknown[] = []
+) {
+    const { deployments, getNamedAccounts } = hre;
+    const { deployer } = await getNamedAccounts();
+    // deploy implementation
+    await deployments.deploy(contract.name, {
+        from: deployer,
+        contract: contract.contractName(),
+        libraries: libraries,
+        args: args,
+        log: true
     });
 }
 
