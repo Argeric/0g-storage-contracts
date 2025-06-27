@@ -56,7 +56,7 @@ const config: HardhatUserConfig = {
                         },
                     },
                     evmVersion: "istanbul",
-                    // viaIR: true,
+                    viaIR: true,
                     optimizer: {
                         enabled: true,
                         runs: 200,
@@ -92,6 +92,15 @@ const config: HardhatUserConfig = {
                 },
             },
         },
+        zgGalileo: {
+            ...userConfig,
+            url: "https://evmrpc-testnet.0g.ai",
+            verify: {
+                etherscan: {
+                    apiUrl: 'https://chainscan-galileo.0g.ai/open'
+                },
+            },
+        },
         cfxTestnetEvm: {
             ...userConfig,
             url: "http://evmtestnet.confluxrpc.com",
@@ -124,6 +133,7 @@ const config: HardhatUserConfig = {
         apiKey: {
             zgTestnetStandard: "YOUR_ZG_SCAN_API_KEY",
             zgTestnetTurbo: "YOUR_ZG_SCAN_API_KEY",
+            zgGalileo: "YOUR_ether_SCAN_API_KEY",
             cfxTestnetEvm: "YOUR_CFX_SCAN_API_KEY",
             sepolia: "YOUR_ether_SCAN_API_KEY",
             holesky: "YOUR_ether_SCAN_API_KEY",
@@ -146,10 +156,18 @@ const config: HardhatUserConfig = {
                 }
             },
             {
+                network: "zgGalileo",
+                chainId: 16601,
+                urls: {
+                    apiURL: "https://chainscan-galileo.0g.ai/open/api",
+                    browserURL: "https://chainscan-galileo.0g.ai"
+                }
+            },
+            {
                 network: "cfxTestnetEvm",
                 chainId: 71,
                 urls: {
-                    apiURL: "https://evmapi-testnet.confluxscan.io/api",
+                    apiURL: "https://evmapi-testnet-stage.confluxscan.io/api",
                     browserURL: "https://evmtestnet.confluxscan.io"
                 },
             },

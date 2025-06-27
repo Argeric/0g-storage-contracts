@@ -5,6 +5,7 @@ import { ZerogTestnetContractConfigsTurbo } from "./networks/zerog_testnet_contr
 import {CfxTestnetEvm} from "./networks/cfx_testnet_evm";
 import { Sepolia } from "./networks/sepolia";
 import { Holesky } from "./networks/holesky";
+import {ZerogGalileoContractConfigs} from "./networks/zerog_galileo_contract_config";
 
 export interface MineConfigs {
     settings: number;
@@ -41,6 +42,7 @@ export const GlobalConfig: { [key: string]: NetworkConfigs } = {
     zg: ZerogContractConfigs,
     zgTestnetStandard: ZerogTestnetContractConfigsStandard,
     zgTestnetTurbo: ZerogTestnetContractConfigsTurbo,
+    zgGalileo: ZerogGalileoContractConfigs,
     cfxTestnetEvm: CfxTestnetEvm,
     sepolia: Sepolia,
     holesky: Holesky,
